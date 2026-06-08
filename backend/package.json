@@ -8,14 +8,22 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx nodemon index.js"
+    "dev": "npx nodemon server.js",
+    "db": "drizzle-kit generate && npx drizzle-kit push"
   },
   "dependencies": {
     "@totallynotdavid/books": "^0.0.2",
     "axios": "^1.17.0",
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "express": "^5.2.1",
-    "multer": "^2.1.1"
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.1.1",
+    "postgres": "^3.4.9"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.10"
   }
 }
