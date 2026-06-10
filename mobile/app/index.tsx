@@ -1,5 +1,5 @@
 import { Image, Pressable, Text, View } from 'react-native';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
@@ -25,7 +25,7 @@ export default function NewUser() {
       return <ThirdPage onNext={nextPage} onBack={prevPage} />;
 
     case 3:
-      return <FourthPage onBack={prevPage} />;
+      return <FourthPage onNext={nextPage} onBack={prevPage} />;
 
     default:
       return <FirstPage onNext={nextPage} />;
@@ -75,7 +75,7 @@ function SecondPage({ onNext, onBack }: PageProps) {
 
       <View className="my-10 mr-10 flex w-2/3 items-end self-end">
         <Text className="text-4xl font-bold">Discover books</Text>
-        <Text className="text-5xl font-bold">you'll love.</Text>
+        <Text className="text-5xl font-bold">you&apos;ll love.</Text>
       </View>
 
       <Image className="h-3/5 w-full" source={require('../assets/sunflower2.png')} />
@@ -154,7 +154,7 @@ function FourthPage({ onBack }: PageProps) {
           <Text className="h-2 w-10 rounded-2xl bg-black"></Text>
         </View>
 
-        <Pressable onPress={() => router.replace('/(auth)/index')}>
+        <Pressable onPress={() => router.replace('/(auth)')}>
           <Text className="my-12 rounded-2xl bg-black px-8 py-3 text-2xl text-white">
             Get Started
           </Text>
