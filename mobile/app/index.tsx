@@ -1,10 +1,23 @@
 import { Image, Pressable, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { useAuthStore } from '../zustand/authStore';
 
 export default function NewUser() {
   const [page, setPage] = useState(0);
+  const hydrated = useAuthStore((state) => state.hydrated);
+  const loggedIn = useAuthStore((state) => state.loggedIn);
+
+  useEffect(() => {
+    if (hydrated && loggedIn) {
+      router.replace('/(tabs)');
+    }
+  }, [hydrated, loggedIn]);
+
+  if (!hydrated) {
+    return <View className="flex-1 bg-background" />;
+  }
 
   const nextPage = () => {
     setPage((prev) => Math.min(prev + 1, 3));

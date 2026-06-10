@@ -15,6 +15,13 @@
       "when": 1780902460941,
       "tag": "0001_sleepy_sumo",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1781076679231,
+      "tag": "0002_dear_toxin",
+      "breakpoints": true
     }
   ]
 }

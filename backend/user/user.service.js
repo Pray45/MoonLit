@@ -22,12 +22,17 @@ export const Login = async ({ email, password }) => {
   return user;
 };
 
-export const Register = async ({ name, email, age, password }) => {
+export const Register = async ({ name, email, password }) => {
   try {
     if (!name) throw new Error("Name is required");
     if (!email) throw new Error("Email is required");
-    if (!age) throw new Error("Age is required");
     if (!password) throw new Error("Password is required");
+
+    const [existingUser] = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email));
+    if (existingUser) throw new Error("Email already exists");
 
     const hashedPassword = await BcryptHash(password);
 
@@ -36,7 +41,6 @@ export const Register = async ({ name, email, age, password }) => {
       .values({
         name,
         email,
-        age,
         password: hashedPassword,
       })
       .returning();
