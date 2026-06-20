@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import AuthRouter from "./user/user.routes.js";
 import Bookrouter from "./books/books.routes.js";
+import connectDB from "./db.js";
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors("*"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// connect to database
+
+connectDB();
 
 // Routes
 
