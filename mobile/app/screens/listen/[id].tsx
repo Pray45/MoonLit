@@ -4,9 +4,22 @@ import React, { useState } from 'react';
 import Button from '../../../components/Ui/Button';
 import { useLocalSearchParams } from 'expo-router';
 
+const descriptions: Record<string, string> = {
+  '1': "Atomic Habits is a self-help book written by James Clear that explores the power of small habits and how they can lead to significant personal and professional growth. The book provides practical strategies for building good habits, breaking bad ones, and making lasting changes in one's life.",
+  '2': 'The Alchemist follows the journey of Santiago, a young shepherd who dreams of finding treasure at the Egyptian pyramids. Along the way, he learns about listening to his heart, pursuing his dreams, and the interconnectedness of all things.',
+  '3': 'The Silent Patient is a psychological thriller about a woman who shoots her husband and then refuses to speak. When a psychotherapist becomes obsessed with uncovering her motive, he discovers shocking truths about his patient.',
+};
+
 export default function Listen() {
-  const { cover, title, author } = useLocalSearchParams();
+  const { cover, title, author, id } = useLocalSearchParams<{
+    cover: string;
+    title: string;
+    author: string;
+    id: string;
+  }>();
   const [sidebarVisible, setSidebarVisible] = useState(false);
+
+  const description = descriptions[id] || 'No description available for this book.';
 
   return (
     <ScrollView
@@ -19,14 +32,14 @@ export default function Listen() {
           <Button icon="arrow-back" link="/(tabs)/" />
           <Pressable
             onPress={() => setSidebarVisible(!sidebarVisible)}
-            className="z-100 h-12  w-12 items-center justify-center  rounded-full bg-zinc-500">
+            className="z-100 h-12 w-12 items-center justify-center rounded-full bg-zinc-500">
             <Ionicons name="grid-outline" size={24} color="white" />
           </Pressable>
         </View>
 
         <View className="h-3/4 w-1/2 self-center justify-self-center overflow-hidden rounded-xl">
           <Image
-            source={{ uri: cover as string }}
+            source={{ uri: cover }}
             resizeMode="cover"
             className="aspect-[2/3] w-full border-2 border-neutral-300 bg-neutral-200"
           />
@@ -44,29 +57,7 @@ export default function Listen() {
 
       <View className="mt-20 px-8">
         <Text className="mb-4 text-2xl font-bold text-black">Description</Text>
-        <Text className="text-base font-medium text-zinc-500">
-          Atomic Habits is a self-help book written by James Clear that explores the power of small
-          habits and how they can lead to significant personal and professional growth. The book
-          provides practical strategies for building good habits, breaking bad ones, and making
-          lasting changes in one&apos;s life. Clear emphasizes the importance of focusing on systems
-          rather than goals, and he offers actionable advice on how to create an environment that
-          supports positive behavior change. With its engaging storytelling and evidence-based
-          insights, Atomic Habits has become a popular resource for individuals looking to improve
-          their habits and achieve their goals.Atomic Habits is a self-help book written by James
-          Clear that explores the power of small habits and how they can lead to significant
-          personal and professional growth. The book provides practical strategies for building good
-          habits, breaking bad ones, and making lasting changes in one&apos;s life. Clear emphasizes the
-          importance of focusing on systems rather than goals, and he offers actionable advice on
-          how to create an environment that supports positive behavior change. With its engaging
-          storytelling and evidence-based insights, Atomic Habits has become a popular resource for
-          individuals looking to improve their habits and achieve their goals.Atomic Habits is a
-          self-help book written by James Clear that explores the power of small habits and how they
-          can lead to significant personal and professional growth. The book provides practical
-          strategies for building good habits, breaking bad ones, and making lasting changes in
-          one&apos;s life. Clear emphasizes the importance of focusing on systems rather than goals, and
-          he offers actionable advice on how to create an environment that supports positive
-          behavior change. With its engaging storytelling and evidence-based insights, Atomic Habits
-        </Text>
+        <Text className="text-base font-medium text-zinc-500">{description}</Text>
       </View>
     </ScrollView>
   );

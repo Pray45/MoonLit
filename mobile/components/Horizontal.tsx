@@ -1,6 +1,7 @@
 import { View, Text, Image, ScrollView, Pressable } from 'react-native';
+import React from 'react';
 
-export default function Horizontal({ data }: { data: any[] }) {
+export default function Horizontal({ data }: { data: any }) {
   return (
     <ScrollView
       horizontal
@@ -9,18 +10,20 @@ export default function Horizontal({ data }: { data: any[] }) {
         paddingHorizontal: 16,
         paddingVertical: 8,
       }}>
-      {data.map((item) => (
+      {data.map((item:any) => (
         <Pressable key={item.id} className="mr-4 w-44" android_ripple={{ color: '#ddd' }}>
-          <View className="overflow-hidden rounded-lg border border-neutral-200/50 bg-neutral-50 shadow-sm">
+          <View className="overflow-hidden bg-white/50 ">
             <Image
               source={{ uri: item.cover }}
               resizeMode="cover"
-              className="aspect-[2/3] w-full bg-neutral-200"
+              className="aspect-[2/3] w-full border-2"
             />
 
-            <View className="bg-white p-3">
-              <View className="mb-2 self-start rounded-lg bg-amber-100 px-2 py-1">
-                <Text className="text-xs font-medium text-amber-700">{item.genre}</Text>
+            <View className="py-3 px-1">
+              <View className="mb-0.5 self-start rounded-lg bg-amber-100 px-2 py-1">
+                <Text numberOfLines={1} className="text-xs font-medium text-amber-700">
+                  {item.genre}
+                </Text>
               </View>
 
               <Text numberOfLines={1} className="text-base font-bold text-neutral-900">

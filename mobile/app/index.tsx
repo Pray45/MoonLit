@@ -16,61 +16,47 @@ export default function NewUser() {
   }, [hydrated, loggedIn]);
 
   if (!hydrated) {
-    return <View className="bg-bgst flex-1" />;
+    return <View className="flex-1 bg-bgst" />;
   }
 
-  const nextPage = () => {
-    setPage((prev) => Math.min(prev + 1, 3));
-  };
+  const nextPage = () => setPage((prev) => Math.min(prev + 1, 3));
+  const prevPage = () => setPage((prev) => Math.max(prev - 1, 0));
 
-  const prevPage = () => {
-    setPage((prev) => Math.max(prev - 1, 0));
-  };
+  const pages = [
+    <FirstPage key={0} onNext={nextPage} />,
+    <SecondPage key={1} onNext={nextPage} onBack={prevPage} />,
+    <ThirdPage key={2} onNext={nextPage} onBack={prevPage} />,
+    <FourthPage key={3} onBack={prevPage} />,
+  ];
 
-  switch (page) {
-    case 0:
-      return <FirstPage onNext={nextPage} />;
-
-    case 1:
-      return <SecondPage onNext={nextPage} onBack={prevPage} />;
-
-    case 2:
-      return <ThirdPage onNext={nextPage} onBack={prevPage} />;
-
-    case 3:
-      return <FourthPage onNext={nextPage} onBack={prevPage} />;
-
-    default:
-      return <FirstPage onNext={nextPage} />;
-  }
+  return pages[page] || pages[0];
 }
 
 type PageProps = {
-  onNext: () => void;
+  onNext?: () => void;
   onBack?: () => void;
 };
 
 function FirstPage({ onNext }: PageProps) {
+  if (!onNext) return null;
   return (
-    <View className="bg-bgst h-full w-full justify-end">
-      <View className="ml-10 flex justify-start">
+    <View className="h-full w-full justify-end bg-bgst">
+      <View className="ml-10 flex">
         <Text className="text-6xl font-bold">Your</Text>
         <Text className="text-6xl font-bold">Bookshelf</Text>
       </View>
 
       <Image className="h-2/3 w-full" source={require('../assets/INDEX.png')} />
 
-      <View className="flex flex-row items-center justify-around">
-        <View className="flex flex-row gap-2">
-          <Text className="h-2 w-10 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
+      <View className="flex-row items-center justify-around">
+        <View className="flex-row gap-2">
+          <Text className="h-2 w-10 rounded-2xl bg-black" />
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
         </View>
 
-        <Pressable
-          onPress={onNext}
-          className="my-12 flex-row rounded-2xl bg-black px-8 py-2.5 text-2xl text-white">
+        <Pressable onPress={onNext} className="my-12 flex-row rounded-2xl bg-black px-8 py-2.5">
           <Text className="px-3 text-2xl text-white">Next</Text>
           <Ionicons name="arrow-forward" size={28} color="white" />
         </Pressable>
@@ -81,29 +67,27 @@ function FirstPage({ onNext }: PageProps) {
 
 function SecondPage({ onNext, onBack }: PageProps) {
   return (
-    <View className="bg-bgst h-full w-full justify-end">
+    <View className="h-full w-full justify-end bg-bgst">
       <Pressable onPress={onBack} className="absolute left-6 top-16 z-10">
         <Ionicons name="arrow-back" size={28} color="black" />
       </Pressable>
 
-      <View className="my-10 mr-10 flex w-2/3 items-end self-end">
+      <View className="my-10 mr-10 w-2/3 items-end self-end">
         <Text className="text-4xl font-bold">Discover books</Text>
         <Text className="text-5xl font-bold">you&apos;ll love.</Text>
       </View>
 
       <Image className="h-3/5 w-full" source={require('../assets/sunflower2.png')} />
 
-      <View className="flex flex-row items-center justify-around">
-        <View className="flex flex-row gap-2">
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-10 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
+      <View className="flex-row items-center justify-around">
+        <View className="flex-row gap-2">
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
+          <Text className="h-2 w-10 rounded-2xl bg-black" />
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
         </View>
 
-        <Pressable
-          onPress={onNext}
-          className="my-12 flex-row rounded-2xl bg-black px-8 py-2.5 text-2xl text-white">
+        <Pressable onPress={onNext} className="my-12 flex-row rounded-2xl bg-black px-8 py-2.5">
           <Text className="px-3 text-2xl text-white">Next</Text>
           <Ionicons name="arrow-forward" size={28} color="white" />
         </Pressable>
@@ -114,29 +98,27 @@ function SecondPage({ onNext, onBack }: PageProps) {
 
 function ThirdPage({ onNext, onBack }: PageProps) {
   return (
-    <View className="bg-bgst h-full w-full justify-end">
+    <View className="h-full w-full justify-end bg-bgst">
       <Pressable onPress={onBack} className="absolute left-6 top-16 z-10">
         <Ionicons name="arrow-back" size={28} color="black" />
       </Pressable>
 
       <Image className="h-3/5 w-full" source={require('../assets/miss.png')} />
 
-      <View className="my-10 mr-10 flex w-2/3 items-end self-end">
+      <View className="my-10 mr-10 w-2/3 items-end self-end">
         <Text className="text-5xl font-bold">read Books</Text>
         <Text className="text-4xl font-bold">Anytime Anywhere.</Text>
       </View>
 
-      <View className="flex flex-row items-center justify-around">
-        <View className="flex flex-row gap-2">
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-10 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
+      <View className="flex-row items-center justify-around">
+        <View className="flex-row gap-2">
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
+          <Text className="h-2 w-10 rounded-2xl bg-black" />
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
         </View>
 
-        <Pressable
-          onPress={onNext}
-          className="my-12 flex-row rounded-2xl bg-black px-8 py-2.5 text-2xl text-white">
+        <Pressable onPress={onNext} className="my-12 flex-row rounded-2xl bg-black px-8 py-2.5">
           <Text className="px-3 text-2xl text-white">Next</Text>
           <Ionicons name="arrow-forward" size={28} color="white" />
         </Pressable>
@@ -147,24 +129,24 @@ function ThirdPage({ onNext, onBack }: PageProps) {
 
 function FourthPage({ onBack }: PageProps) {
   return (
-    <View className="bg-bgst h-full w-full justify-end">
+    <View className="h-full w-full justify-end bg-bgst">
       <Pressable onPress={onBack} className="absolute left-6 top-16 z-10">
         <Ionicons name="arrow-back" size={28} color="black" />
       </Pressable>
 
-      <View className="my-10 ml-10 flex w-2/3 items-start self-start">
+      <View className="my-10 ml-10 w-2/3 items-start self-start">
         <Text className="text-5xl font-bold">read Books</Text>
         <Text className="text-4xl font-bold">Anytime Anywhere.</Text>
       </View>
 
       <Image className="h-3/5 w-full" source={require('../assets/book.png')} />
 
-      <View className="flex flex-row items-center justify-around">
-        <View className="flex flex-row gap-2">
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-3 rounded-2xl bg-black"></Text>
-          <Text className="h-2 w-10 rounded-2xl bg-black"></Text>
+      <View className="flex-row items-center justify-around">
+        <View className="flex-row gap-2">
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
+          <Text className="h-2 w-3 rounded-2xl bg-black" />
+          <Text className="h-2 w-10 rounded-2xl bg-black" />
         </View>
 
         <Pressable onPress={() => router.replace('/(auth)')}>

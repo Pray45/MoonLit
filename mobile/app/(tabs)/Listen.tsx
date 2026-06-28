@@ -1,5 +1,5 @@
-import { View, Text, Image, ScrollView, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import { ScrollView } from 'react-native';
+import React from 'react';
 import Vertical from 'components/Vertical';
 import books from '../../data.json';
 

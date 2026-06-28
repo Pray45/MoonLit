@@ -13,8 +13,9 @@ export default function RootLayout() {
   const loggedIn = useAuthStore((state) => state.loggedIn);
 
   useEffect(() => {
-    NavigationBar.setBackgroundColorAsync('#1E1E1E');
-    NavigationBar.setButtonStyleAsync('light');
+    NavigationBar.setVisibilityAsync('hidden').catch(() => {});
+    NavigationBar.setBackgroundColorAsync('#000000').catch(() => {});
+    NavigationBar.setButtonStyleAsync('light').catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -31,12 +32,13 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <StatusBar style="light" />
+      <StatusBar style="light" backgroundColor="#000000" />
       <Stack
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: '#050816' },
-        }}>
+          contentStyle: { backgroundColor: '#fef7ec' },
+        }}
+      >
         {loggedIn ? (
           <Stack.Screen name="(tabs)" />
         ) : (

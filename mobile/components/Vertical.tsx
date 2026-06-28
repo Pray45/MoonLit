@@ -8,12 +8,12 @@ type VerticalProps = {
 
 export default function Vertical({ data, scale = 1 }: VerticalProps) {
   const coverWidth = 176 * scale; // w-44
-  const coverHeight = coverWidth * 1.5;
   const cardWidth = 384 * scale; // w-96
   const cardHeight = 160 * scale; // h-40
 
   return (
     <ScrollView
+    className="mb-20"
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{
         paddingHorizontal: 16,
@@ -41,14 +41,13 @@ export default function Vertical({ data, scale = 1 }: VerticalProps) {
 
               <Pressable
                 onPress={() => router.push({ pathname: `/screens/listen/${item.id}`, params: { cover: item.cover, title: item.title, author: item.author } })}
+                className="absolute rounded-lg border border-amber-500/50 bg-amber-200/10"
                 style={{
-                  position: 'absolute',
                   left: -24 * scale,
                   bottom: 40 * scale,
                   width: cardWidth,
                   height: cardHeight,
                   padding: 12 * scale,
-                  backgroundColor: 'rgba(253,224,71,0.3)',
                 }}>
                 <Text
                   numberOfLines={2}

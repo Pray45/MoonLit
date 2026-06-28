@@ -1,5 +1,4 @@
-import axios, { create as createAxios, isAxiosError } from 'axios';
-import Constants from 'expo-constants';
+import { create as createAxios, isAxiosError } from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import { Platform } from 'react-native';
 import { create } from 'zustand';
@@ -40,7 +39,7 @@ const STORAGE_KEYS = {
   userData: 'auth.userData',
 } as const;
 
-const API_BASE_URL = 'http://10.134.185.138:5000';
+const API_BASE_URL = 'http://10.85.210.138:5000';
 
 const storage = {
   async getItem(key: string) {
