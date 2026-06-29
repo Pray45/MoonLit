@@ -38,7 +38,7 @@ export default function SidebarWave() {
   return (
     <SafeAreaView className="absolute left-0 z-10 top-0 h-[1000px] w-16 items-center justify-center">
       <ScrollView
-        className="h-full w-full"
+        className="h-full w-full mb-20"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingVertical: 20 }}>
         {categories.map((category) => (

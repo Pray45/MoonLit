@@ -9,6 +9,8 @@ module.exports = {
         bgst: 'var(--bgst)',
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        yel: 'var(--yel)',
+        org: 'var(--org)',
       },
     },
   },

@@ -6,14 +6,17 @@ import Title from 'components/Title';
 import Horizontal from 'components/Horizontal';
 import Vertical from 'components/Vertical';
 import books from '../../data.json';
+import BuyMeCoffee from 'components/Ui/BuyMeCoffee';
 
 export default function index() {
+  const coffee = true;
   return (
     <View className="flex-1 bg-background">
       <SafeAreaView edges={['top']} className="flex-1">
-        <Header />
-        <ScrollView className="flex-1">
+        <Header heading="MoonLit" imgShown={true} />
+        <ScrollView className="flex">
           <View className="mt-5">
+            {coffee && <BuyMeCoffee />}
             <Title title="Recents" readmore />
             <Horizontal data={books} />
             <Title title="Featured Books" readmore={false} />

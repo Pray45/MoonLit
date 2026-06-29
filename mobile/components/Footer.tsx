@@ -1,64 +1,40 @@
-import { View, Image, Pressable } from 'react-native';
+import { View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { router } from 'expo-router/build/exports';
+import { router } from 'expo-router';
 
-const Footer = ({ highlight }: { highlight: string }) => {
+type TabName = 'home' | 'category' | 'bookmark' | 'search' | 'event';
+
+const tabs: {
+  name: TabName;
+  icon:
+  | 'home-outline'
+  | 'book-outline'
+  | 'bookmark-outline'
+  | 'search-outline'
+  | 'sparkles-outline';
+  route: string;
+}[] = [
+    { name: 'category', icon: 'book-outline', route: '/(tabs)/Category' },
+    { name: 'bookmark', icon: 'bookmark-outline', route: '/(tabs)/bookmark' },
+    { name: 'home', icon: 'home-outline', route: '/(tabs)' },
+    { name: 'search', icon: 'search-outline', route: '/(tabs)/Search' },
+    { name: 'event', icon: 'sparkles-outline', route: '/(tabs)/event' },
+  ];
+
+const Footer = ({ highlight }: { highlight: TabName }) => {
   return (
-    <View className="absolute bottom-0 w-full">
-      <Image className="absolute bottom-[-20] w-full" source={require('../assets/base.png')} />
-      <View className="z-10 flex-row items-center justify-around py-8 pb-0.5">
-
-        <Pressable className="w-12 h-12" onPress={() => router.replace('/(tabs)/Profile')}>
+    <View className="z-10 flex-row items-center justify-around py-4 bg-background border-2">
+      {tabs.map((tab) => (
+        <Pressable key={tab.name} className="flex p-3 items-center justify-center" onPress={() => router.replace(tab.route as any)}>
           <Ionicons
-            className={highlight === 'profile' ? 'text-amber-400' : ''}
-            name="book-outline"
+            key={tab.name}
+            name={tab.icon}
             size={24}
-            color="white"
+            color={highlight === tab.name ? '#f59e0b' : 'black'}
           />
         </Pressable>
-
-
-        <Pressable className="w-12 h-12 mb-4 pb-4" onPress={() => router.replace('/(tabs)/bookmark')}>
-          <Ionicons
-            className={highlight === 'bookmark' ? 'text-amber-400' : ''}
-            name="bookmark-outline"
-            size={24}
-            color="white"
-          />
-        </Pressable>
-
-
-        <Pressable className="w-12 h-12 mb-4" onPress={() => router.replace('/(tabs)')}>
-          <Ionicons
-            className={highlight === 'home' ? 'text-amber-400' : ''}
-            name="home-outline"
-            size={24}
-            color="white"
-          />
-        </Pressable>
-
-
-        <Pressable className="w-12 h-12 mb-4" onPress={() => router.replace('/(tabs)/Listen')}>
-          <Ionicons
-            className={highlight === 'listen' ? 'text-amber-400' : ''}
-            name="headset-outline"
-            size={24}
-            color="white"
-          />
-        </Pressable>
-
-
-        <Pressable className="w-12 h-12 mb-4" onPress={() => router.replace('/(tabs)/event')}>
-          <Ionicons
-            className={highlight === 'event' ? 'text-amber-400' : ''}
-            name="sparkles-outline"
-            size={24}
-            color="white"
-          />
-        </Pressable>
-
-      </View>
+      ))}
     </View>
   );
 };
