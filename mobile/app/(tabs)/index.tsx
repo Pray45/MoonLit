@@ -20,7 +20,7 @@ export default function index() {
             <Title title="Recents" readmore />
             <Horizontal data={books} />
             <Title title="Featured Books" readmore={false} />
-            <View className="pl-10">
+            <View className="ml-10 w-full">
               <Vertical data={books} scale={0.9} />
             </View>
           </View>

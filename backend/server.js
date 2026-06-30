@@ -26,6 +26,6 @@ app.use("/books", Bookrouter); // search, get, update, delete
 
 // Server Port
 
-app.listen(PORT, () => {
-  console.log(`App is listening on port ${PORT}`);
+app.listen(PORT || 5000, () => {
+  console.log(`App is listening on port ${PORT || 5000}`);
 });

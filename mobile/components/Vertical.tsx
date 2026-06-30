@@ -28,7 +28,7 @@ export default function Vertical({ data, scale = 1 }: VerticalProps) {
                 style={{
                   width: coverWidth,
                   overflow: 'hidden',
-                  borderWidth: 1,
+                  borderWidth: 2,
                   borderColor: '#6b7280',
                   zIndex: 10,
                 }}>
