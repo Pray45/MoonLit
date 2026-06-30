@@ -32,7 +32,7 @@ const bookSchema = new mongoose.Schema({
 
     all_genres: [String],
 
-    genre: string,
+    genre: String,
 
     publishYear: Number,
     
